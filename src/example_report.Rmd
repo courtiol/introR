@@ -1,0 +1,18 @@
+---
+title: "my_script"
+author: "Liam D. Bailey"
+date: "2023-02-10"
+output: html_document
+---
+
+# Section header
+
+## Section subheader
+
+Some notes about my code **in bold**. Below I include my code chunk...
+
+```{r}
+1 + 1
+```
+
+Some more notes...

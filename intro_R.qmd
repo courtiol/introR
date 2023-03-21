@@ -1,0 +1,745 @@
+---
+title: "Introduction to R"
+author: Dr. Liam D. Bailey
+format:
+  revealjs:
+    toc: true
+    toc-depth: 1
+    theme: [moon, css/custom.scss]
+highlight-style: a11y
+self-contained: true
+self-contained-math: true
+---
+
+# Installing R and R Studio
+
+------------------------------
+
+## What is R?
+
+![](src/R_website.png)
+
+## What is RStudio? {auto-animate="true"}
+
+![](src/rstudio_website.png)
+
+## What is RStudio? {auto-animate="true"}
+
+![](src/rstudio_panes.png)
+
+# R packages
+
+------------------------------
+
+## Installing and loading R packages {auto-animate="true"}
+
+<br>
+
+::: {.fragment}
+```{r}
+#| eval: false
+#| echo: true
+install.packages("dplyr")
+```
+:::
+
+<br>
+
+::: {.fragment}
+```{r}
+#| echo: true
+library(dplyr)
+```
+:::
+
+## Packages for this course
+
+::: callout-note
+INSTALL THESE ON YOUR SYSTEM NOW!
+:::
+
+```{r}
+#| eval: false
+#| echo: true
+install.packages("adegenet")
+install.packages("pegas")
+install.packages("poppr")
+install.packages("hierfstat")
+install.packages("ggplot2")
+install.packages("lattice")
+install.packages("viridisLite")
+```
+
+## Updating R packages {auto-animate="true"}
+
+```{r}
+#| echo: true
+packageVersion("ggplot2")
+```
+
+::: {.fragment}
+![](src/update.png)
+:::
+
+# Good practice
+
+## Good practice {auto-animate="true"}
+
+### Set RStudio options
+
+![](src/rstudio_options.png)
+
+## Good practice {auto-animate="true"}
+
+### Save your script in a file
+
+![](src/rstudio_panes.png)
+
+**We'll talk about RMarkdown later**
+
+## Good practice {auto-animate="true"}
+
+### Use comments to understand your code better
+
+```{r}
+#| echo: true
+#| eval: false
+#| code-line-numbers: "1|2"
+# EXPLAIN WHAT THE CODE DOES
+my_code_here
+```
+
+# Basics of R: Functions
+
+## Functions {auto-animate="true"}
+
+<br>
+(Generally) take an input and return an output in R. For example, the function `sum()` takes a numeric vector and will return a single value.
+
+```{r}
+#| echo: true
+## Find the sum of some numbers
+sum(c(1, 3, 5, 1))
+```
+
+::: {.fragment}
+::: callout-note
+We'll discuss more what a **numeric vector** is soon.
+:::
+:::
+
+## Functions {auto-animate="true"}
+
+<br>
+Trouble-shoot using `?` or `help()`
+
+```{r}
+#| echo: true
+## Help documentation of the function sum()
+help(sum)
+?sum
+```
+
+You can learn what package the function is from, what the function does and what arguments it takes.
+
+## Functions {auto-animate="true"}
+
+![](src/help_doc.png)
+
+## Functions {auto-animate="true"}
+
+::: callout-warning
+Different packages might have functions with the same name!!
+:::
+
+`package::function()` is explicit about which package to use.
+
+```{r}
+#| echo: true
+## Use :: to specify which package a function comes from
+base::sum(c(1, 3, 5, 1))
+```
+
+## Functions {auto-animate="true"}
+
+<br>
+If a function doesn't work it will display an error...
+
+```{r}
+#| echo: true
+#| error: true
+sum(-)
+```
+
+::: {.fragment}
+...but these errors aren't always easy to read!
+:::
+
+# Basics of R: Object types
+
+## Object types {auto-animate="true"}
+
+<br>
+Basic object type (or 'classes')
+
+```{r}
+#| echo: true
+## Character string
+"word"
+```
+
+::: {.fragment}
+```{r}
+#| echo: true
+## Numeric
+1.2
+```
+:::
+
+::: {.fragment}
+```{r}
+#| echo: true
+## Logical (TRUE/FALSE)
+TRUE
+```
+:::
+
+::: {.fragment}
+```{r}
+#| echo: true
+## Factor
+factor(c("A", "B"), levels = c("A", "B"))
+```
+:::
+
+## Object types {auto-animate="true"}
+
+<br>
+Use `str()` if you're unsure!
+
+```{r}
+#| echo: true
+str("word")
+```
+
+::: {.fragment}
+```{r}
+#| echo: true
+str(1.2)
+```
+:::
+
+::: {.fragment}
+```{r}
+#| echo: true
+str(TRUE)
+```
+:::
+
+::: {.fragment}
+```{r}
+#| echo: true
+str(factor(c("A", "B")))
+```
+:::
+
+## Object types {auto-animate="true"}
+
+<br>
+Assign an object with `<-` or `->`
+
+```{r}
+#| echo: true
+#| code-line-numbers: "1-2|4-5"
+## Save value to use later!
+my_object <- "A"
+
+## Check what object we just created!
+str(my_object)
+```
+
+# Vector
+
+## Vector {auto-animate="true"}
+
+<br>
+(Generally) >1 value of the **same type**
+
+```{r}
+#| echo: true
+#| code-line-numbers: "1-2|4-5"
+## Create a vector of numeric
+my_vector <- c(1.2, 3.4, 0.1)
+
+## Check the structure...
+str(my_vector)
+```
+
+## Vector {auto-animate="true"}
+
+<br>
+(Generally) >1 value of the [**same type**]{style="color:#ff2c2d;"}
+
+```{r}
+#| echo: true
+#| code-line-numbers: "1-2|4-5"
+## A vector will *coerce* everything to be the same
+my_vector <- c(115.3, -0.1, "2")
+
+## Notice everything is character!
+str(my_vector)
+```
+
+## Vector {auto-animate="true"}
+
+<br>
+Vectors have 1 dimension (a length)
+
+```{r}
+#| echo: true
+## Find how many values are in your vector!
+length(my_vector)
+```
+
+## Vector {auto-animate="true"}
+
+<br>
+Select particular values using 'indexing' with []
+
+```{r}
+#| echo: true
+#| code-line-numbers: "1-2|4-5"
+## 'Index' a vector using []
+my_vector <- c("A", 115.3, -0.1)
+
+## Find the first value in the vector
+my_vector[1]
+```
+
+::: {.fragment}
+```{r}
+#| echo: true
+## Find the first and third value in the vector
+my_vector[c(1, 3)]
+```
+:::
+
+::: {.fragment}
+```{r}
+#| echo: true
+## Find everything *except* the second value in the vector
+my_vector[-2]
+```
+:::
+
+## Vector {auto-animate="true"}
+
+<br>
+Watch out for missing data.
+
+```{r}
+#| echo: true
+#| code-line-numbers: "1-2|4|5|6|7|8"
+# This numeric vector has some unusual values
+missing_data <- c(NULL, 1.1, 0.2, NA, 7, NaN, Inf)
+
+# NULL: Empty
+# NA: Missing data (can be any type)
+# NaN: Not a number (specific to numeric)
+# Inf: Infinity
+str(missing_data)
+```
+
+# Matrix
+
+## Matrix {auto-animate="true"}
+
+<br>
+(Generally) >1 value of the [**same type**]{style="color:#ff2c2d;"} with [**two dimensions**]{style="color:#ff2c2d;"}
+
+```{r}
+#| echo: true
+## A vector only has one dimension (length)
+c(1, 2, 3, 4)
+```
+
+::: {.fragment}
+```{r}
+#| echo: true
+#| code-line-numbers: "1-4|6-7"
+## A matrix has two dimensions (number rows and number columns)
+## Create a 2x2 dimensional matrix
+my_matrix <- matrix(c(1, 2, 3, 4),
+                    nrow = 2, ncol = 2)
+
+## Check the structure...
+str(my_matrix)
+```
+:::
+
+## Matrix {auto-animate="true"}
+
+<br>
+(Generally) >1 value of the [**same type**]{style="color:#ff2c2d;"} with **two dimensions**
+
+```{r}
+#| echo: true
+#| code-line-numbers: "1-4|6-7"
+## A matrix will also coerce values!
+my_matrix <- matrix(c("1", 2, 3, 4),
+                    # Create a 2x2 matrix
+                    nrow = 2, ncol = 2)
+
+## Everything is character!!
+str(my_matrix)
+```
+
+## Matrix {auto-animate="true"}
+
+<br>
+(Generally) >1 value of the **same type** with [**two dimensions**]{style="color:#ff2c2d;"}
+
+```{r}
+#| echo: true
+## Find the number of rows in my matrix
+nrow(my_matrix)
+
+## Find the number of columns in my matrix
+ncol(my_matrix)
+```
+
+## Matrix {auto-animate="true"}
+
+Index a matrix with `[]`.
+
+::: callout-warning
+Remember, now we have two dimensions. So we index with [**ROW**]{style="color:#ff2c2d;"} then [**COLUMN**]{style="color:#ff2c2d;"}.
+:::
+
+```{r}
+#| echo: true
+## Find the value at row 1 and column 2
+my_matrix[1, 2]
+```
+
+::: {.fragment}
+```{r}
+#| echo: true
+## Find all values in row 1
+my_matrix[1, ]
+```
+:::
+
+::: {.fragment}
+```{r}
+#| echo: true
+## Find all values in column 2
+my_matrix[, 2]
+```
+:::
+
+# List
+
+## List {auto-animate="true"}
+
+Contains any number of items. Each item can be a [**different type**]{style="color:#ff2c2d;"}.
+
+```{r}
+#| echo: true
+## Storing in a vector or matrix will coerce!
+c(c(1, 2, 3), c("A", "B", "C"), c(3, 4, 5))
+```
+
+::: {.fragment}
+```{r}
+#| echo: true
+## Use lists to store character and numeric data in one object
+my_list <- list(c(1, 2, 3),
+                c("A", "B", "C"),
+                c(3, 4, 5))
+
+my_list
+```
+:::
+
+## List {auto-animate="true"}
+
+Contains any number of items. Each item can be a [**different type**]{style="color:#ff2c2d;"}.
+
+```{r}
+#| echo: true
+## Check the structure
+str(my_list)
+```
+
+## List {auto-animate="true"}
+
+<br>
+A list has [**one dimension**]{style="color:#ff2c2d;"} (length: the number of items in the list)
+
+```{r}
+#| echo: true
+## Number of items in the list
+length(my_list)
+```
+
+## List {auto-animate="true"}
+
+We can index a list with `[]` and `[[]]`.
+
+::: callout-warning
+They have slightly different meanings!
+:::
+
+```{r}
+#| echo: true
+## Use `[]` to create a smaller list
+## Create a new list with item 1 and 3
+my_list[c(1, 3)]
+```
+
+::: {.fragment}
+```{r}
+#| echo: true
+## Use `[[]]` to access the items inside the list
+## Return list item 1
+my_list[[1]]
+```
+:::
+
+## List {auto-animate="true"}
+
+::: callout-note
+Many advanced functions will store their output as a list object. Remember, you can use `str()` to understand them better.
+:::
+
+```{r}
+#| echo: true
+# These objects have a nice print output
+model <- lm(Sepal.Length ~ Sepal.Width, data = iris)
+model
+```
+
+## List {auto-animate="true"}
+
+::: callout-note
+Many advanced functions will store their output as a list object. Remember, you can use `str()` to understand them better.
+:::
+
+```{r}
+#| echo: true
+# Internally, they have a lot more information!!
+str(model)
+```
+
+# Data frame
+
+## Data frame {auto-animate="true"}
+
+A special type of list:
+
+- Each item in the list is a vector ([**same type**]{style="color:#ff2c2d;"})
+- All items in the list are the [**same length**]{style="color:#ff2c2d;"}
+- Each item has a [**unique name**]{style="color:#ff2c2d;"}
+
+```{r}
+#| echo: true
+## Create our own data frame!
+my_df <- data.frame(col1 = c(1, 2, 3, 4),
+                    col2 = c("A", "B", "C", "D"),
+                    col3 = c(3, 4, 5, 6))
+
+my_df
+```
+
+## Data frame {auto-animate="true"}
+
+A special type of list:
+
+- Each item in the list is a vector ([**same type**]{style="color:#ff2c2d;"})
+- All items in the list are the [**same length**]{style="color:#ff2c2d;"}
+- Each item has a [**unique name**]{style="color:#ff2c2d;"}
+
+```{r}
+#| echo: true
+## Check the structure
+str(my_df)
+```
+
+## Data frame {auto-animate="true"}
+
+<br>
+A data frame has [**two dimensions**]{style="color:#ff2c2d;"} (number of rows and number of columns).
+
+```{r}
+#| echo: true
+## Number of rows...
+nrow(my_df)
+
+## Number of columns...
+ncol(my_df)
+```
+
+## Data frame {auto-animate="true"}
+
+<br>
+We can index using `[]` (just like a matrix) or using column names
+
+```{r}
+#| echo: true
+## Items in rows 1 and 2 from column 2
+my_df[c(1, 2), 2]
+```
+
+::: {.fragment}
+```{r}
+#| echo: true
+## All items in column 2
+my_df[, 2]
+```
+:::
+
+::: {.fragment}
+```{r}
+#| echo: true
+## All items in column named 'col2'
+my_df$col2
+```
+:::
+
+## Data frame {auto-animate="true"}
+
+<br>
+Usually we create a data frame by reading in a .csv file!
+
+```{r}
+#| echo: true
+#| code-line-numbers: "1-2|4-5"
+## Items in rows 1 and 2 from column 2
+iris_df <- read.csv("iris.csv")
+
+str(iris_df)
+```
+
+## Data frame {auto-animate="true"}
+
+Use functions `head()`, `tail()`, or `summary()` to investigate a large data frame.
+
+```{r}
+#| echo: true
+## A summary of all the columns
+summary(iris_df)
+```
+
+## Data frame {auto-animate="true"}
+
+Use functions `head()`, `tail()`, or `summary()` to investigate a large data frame.
+
+```{r}
+#| echo: true
+## The first few rows of data...
+head(iris_df)
+```
+
+# Using RMarkdown
+
+## Using RMarkdown {auto-animate="true"}
+
+RMarkdown (.Rmd) file is a great way to record and share your analyses!!
+
+![](src/Rmd_example.png)
+
+## Using RMarkdown {auto-animate="true"}
+
+Include code and output in the same document.
+
+```{r}
+#| echo: fenced
+## Write your code inside these 'chunks'
+c(1, 2, 3, 4)
+```
+
+## Using RMarkdown {auto-animate="true"}
+
+Include plots to make a report.
+
+```{r}
+#| echo: fenced
+plot(Sepal.Length ~ Sepal.Width, data = iris_df)
+```
+
+## Using RMarkdown {auto-animate="true"}
+
+Write plain text to keep notes
+
+````
+# Section header
+
+## Section subheader
+
+Some notes about my code **in bold**. Below I include my code chunk...
+
+```{{r}}
+1 + 1
+```
+
+Some more notes...
+
+````
+
+## Using RMarkdown {auto-animate="true"}
+
+'knit' your notes to create a report
+
+::: columns
+::: {.column width="50%"}
+````
+# Section header
+
+## Section subheader
+
+Some notes about my code **in bold**. Below I include my code chunk...
+
+```{{r}}
+1 + 1
+```
+
+Some more notes...
+
+````
+:::
+::: {.column width="50%"}
+![](src/knit_example.png)
+:::
+:::
+
+## Using RMarkdown {auto-animate="true"}
+
+'knit' your notes to create a report
+
+![](src/knit_button.png)
+
+## Using RMarkdown {auto-animate="true"}
+
+::: callout-note
+TEST YOUR KNOWLEDGE
+:::
+
+## Using RMarkdown {auto-animate="true"}
+
+- Create a new RMarkdown file in RStudio (File > New File > RMarkdown)
+
+- Create a new chunk of R code:
+```{r}
+#| echo: true
+#| eval: false
+mean(c(1, 2, "3", 4, NA))
+```
+
+- Knit the document to html.
+
+- Check the document. Does the code work properly? Can you use you work out why?
+
+- **BONUS**: Search for the RMarkdown Cheatsheet online and try adding some headers and bold text.
+
+- **BONUS**: Knit the document to PDF.
