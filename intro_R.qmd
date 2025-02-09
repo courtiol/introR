@@ -26,8 +26,6 @@ li {
 
 # Installing R and RStudio
 
-------------------------------
-
 ## What is R?
 
 <!-- https://www.r-project.org/ -->
@@ -47,7 +45,7 @@ li {
 
 ------------------------------
 
-## Installing and loading R packages {auto-animate="true"}
+## Installing and loading R packages
 
 <br>
 
@@ -95,7 +93,7 @@ install.packages("poppr")
 install.packages("hierfstat")
 ```
 
-## Updating R packages {auto-animate="true"}
+## Updating R packages
 
 ```{r}
 #| echo: true
@@ -108,20 +106,20 @@ packageVersion("ggplot2")
 
 # Good practice
 
-## Good practice {auto-animate="true"}
+## Good practice
 
 ### Set RStudio options
 
 ![](src/rstudio_options1.png)
 
-## Good practice {auto-animate="true"}
+## Good practice
 
 ### Set RStudio options
 
 ![](src/rstudio_options2.png)
 
 
-## Good practice {auto-animate="true"}
+## Good practice
 
 ### Save your script in a file
 
@@ -129,21 +127,21 @@ packageVersion("ggplot2")
 
 **We'll talk about RMarkdown later**
 
-## Good practice {auto-animate="true"}
+## Good practice
 
 ### Use comments to understand your code better.
 
 ```{r}
 #| echo: true
 #| eval: false
-#| code-line-numbers: "1|2"
+#| code-line-numbers: "1|2|1-2"
 # EXPLAIN WHAT THE CODE DOES
 my_code_here
 ```
 
 # Basics of R: Functions
 
-## Functions {auto-animate="true"}
+## Functions
 
 <br>
 Functions (generally) take an input and return an output in R.
@@ -164,7 +162,7 @@ sum(c(1, 3, 5, 1))
 :::
 :::
 
-## Functions {auto-animate="true"}
+## Functions
 
 <br>
 Trouble-shoot using `?` or `help()`.
@@ -178,17 +176,19 @@ help(sum)
 
 You can learn what package the function is from, what the function does and what arguments it takes.
 
-## Functions {auto-animate="true"}
+## Functions
 
 ![](src/help_doc.png)
 
-## Functions {auto-animate="true"}
+## Functions
 
 ::: callout-warning
 Different packages might have functions with the same name. 🤯
 :::
 
 <br>
+
+::: {.fragment}
 
 `package::function()` is explicit about which package to use.
 
@@ -197,8 +197,9 @@ Different packages might have functions with the same name. 🤯
 ## In case of ambiguity, use :: and specify the package
 base::sum(c(1, 3, 5, 1))
 ```
+:::
 
-## Functions {auto-animate="true"}
+## Functions
 
 <br>
 If a function doesn't work it will display an error...
@@ -215,7 +216,7 @@ sum(-)
 
 # Basics of R: Objects
 
-## Objects {auto-animate="true"}
+## Objects
 
 <br>
 Basic kinds of R objects (or 'classes'):
@@ -250,7 +251,7 @@ factor(c("A", "B"), levels = c("A", "B"))
 ```
 :::
 
-## Objects {auto-animate="true"}
+## Objects
 
 <br>
 Use `str()` if you're unsure!
@@ -281,14 +282,14 @@ str(factor(c("A", "B")))
 ```
 :::
 
-## Objects {auto-animate="true"}
+## Objects
 
 <br>
 Assign an object with `<-` (or `->`).
 
 ```{r}
 #| echo: true
-#| code-line-numbers: "1-2|4-5"
+#| code-line-numbers: "1-2|4-5|1-5"
 ## Save value to use later!
 my_object <- "A"
 
@@ -298,14 +299,13 @@ str(my_object)
 
 # Vector
 
-## Vector {auto-animate="true"}
+## Vector
 
 <br>
 $\geq$ 1 values of the **same type**.
 
 ```{r}
 #| echo: true
-#| code-line-numbers: "1-2|4-5"
 ## Create a vector of numeric
 my_vector <- c(1.2, 3.4, 0.1)
 
@@ -313,14 +313,13 @@ my_vector <- c(1.2, 3.4, 0.1)
 str(my_vector)
 ```
 
-## Vector {auto-animate="true"}
+## Vector
 
 <br>
 $\geq$ 1 values of the [**same type**]{style="color:#ff2c2d;"}.
 
 ```{r}
 #| echo: true
-#| code-line-numbers: "1-2|4-5"
 ## A vector *coerces* everything to be the same
 my_vector <- c(115.3, -0.1, "2")
 
@@ -328,7 +327,7 @@ my_vector <- c(115.3, -0.1, "2")
 str(my_vector)
 ```
 
-## Vector {auto-animate="true"}
+## Vector
 
 <br>
 Vectors have 1 dimension (a length).
@@ -339,14 +338,13 @@ Vectors have 1 dimension (a length).
 length(my_vector)
 ```
 
-## Vector {auto-animate="true"}
+## Vector
 
 <br>
 Select particular values using 'indexing' with `[]`.
 
 ```{r}
 #| echo: true
-#| code-line-numbers: "1-2|4-5"
 ## 'Index' a vector using []
 my_vector <- c("A", "B", "C")
 
@@ -370,14 +368,14 @@ my_vector[-2]
 ```
 :::
 
-## Vector {auto-animate="true"}
+## Vector
 
 <br>
 Watch out for missing data.
 
 ```{r}
 #| echo: true
-#| code-line-numbers: "1-2|4|5|6|7|8"
+#| code-line-numbers: "1-2|4|5|6|7|8|1-8"
 # This numeric vector has some unusual values
 missing_data <- c(NULL, 1.1, 0.2, NA, 7, NaN, Inf)
 
@@ -388,9 +386,18 @@ missing_data <- c(NULL, 1.1, 0.2, NA, 7, NaN, Inf)
 str(missing_data)
 ```
 
+<br>
+
+::: {.fragment}
+```{r}
+#| echo: true
+missing_data
+```
+:::
+
 # Matrix
 
-## Matrix {auto-animate="true"}
+## Matrix
 
 <br>
 $\geq$ 1 value(s) of the **same type** with **two dimensions**.
@@ -398,13 +405,14 @@ $\geq$ 1 value(s) of the **same type** with **two dimensions**.
 ::: {.fragment}
 ```{r}
 #| echo: true
-#| code-line-numbers: "1-3|4"
 ## Create a 2x2 dimensional matrix
 my_matrix <- matrix(c(1, 2, 3, 4),
                     nrow = 2, ncol = 2)
 my_matrix
 ```
 :::
+
+<br>
 
 ::: {.fragment}
 ```{r}
@@ -413,14 +421,13 @@ str(my_matrix)
 ```
 :::
 
-## Matrix {auto-animate="true"}
+## Matrix
 
 <br>
 $\geq$ 1 value(s) of the [**same type**]{style="color:#ff2c2d;"} with **two dimensions**.
 
 ```{r}
 #| echo: true
-#| code-line-numbers: "1-4|6-7"
 ## A matrix will also coerce values!
 my_matrix <- matrix(c("1", 2, 3, 4),
                     # Create a 2x2 matrix
@@ -430,7 +437,7 @@ my_matrix <- matrix(c("1", 2, 3, 4),
 str(my_matrix)
 ```
 
-## Matrix {auto-animate="true"}
+## Matrix
 
 <br>
 $\geq$ 1 value(s) of the **same type** with [**two dimensions**]{style="color:#ff2c2d;"}.
@@ -439,12 +446,19 @@ $\geq$ 1 value(s) of the **same type** with [**two dimensions**]{style="color:#f
 #| echo: true
 ## Find the number of rows in my matrix
 nrow(my_matrix)
+```
 
+<br>
+
+::: {.fragment}
+```{r}
+#| echo: true
 ## Find the number of columns in my matrix
 ncol(my_matrix)
 ```
+:::
 
-## Matrix {auto-animate="true"}
+## Matrix
 
 Index a matrix with `[]`.
 
@@ -477,7 +491,7 @@ my_matrix[, 2]
 
 # List
 
-## List {auto-animate="true"}
+## List
 
 Contains any number of items.
 
@@ -501,7 +515,7 @@ my_list
 ```
 :::
 
-## List {auto-animate="true"}
+## List
 
 Contains any number of items.
 
@@ -513,7 +527,7 @@ Each item can be a [**different type**]{style="color:#ff2c2d;"}.
 str(my_list)
 ```
 
-## List {auto-animate="true"}
+## List
 
 <br>
 A list has [**one dimension**]{style="color:#ff2c2d;"} (length: the number of items in the list).
@@ -524,20 +538,23 @@ A list has [**one dimension**]{style="color:#ff2c2d;"} (length: the number of it
 length(my_list)
 ```
 
-## List {auto-animate="true"}
+## List
 
+<br>
 We can index a list with `[]` and `[[]]`.
 
 ::: callout-warning
 They have slightly different meanings!
 :::
 
+::: {.fragment}
 ```{r}
 #| echo: true
 ## Use `[]` to create a smaller list
 ## Create a new list with item 1 and 3
 my_list[c(1, 3)]
 ```
+:::
 
 ::: {.fragment}
 ```{r}
@@ -548,8 +565,9 @@ my_list[[1]]
 ```
 :::
 
-## List {auto-animate="true"}
+## List
 
+<br>
 When list-elements are named, they can be accessed using either `[[]]` or `$`.
 
 ```{r}
@@ -559,14 +577,25 @@ my_named_list <- list(first = c(1, 2, 3),
                       second = c("A", "B", "C"),
                       third = c(3, 4, 5))
 str(my_named_list)
+```
+
+::: {.fragment}
+```{r}
+#| echo: true
 ## Use `[[]]` to access the items inside the list
 my_named_list[["first"]] # same as my_named_list[[1]]
+```
+:::
+
+::: {.fragment}
+```{r}
+#| echo: true
 ## Use `$` to access the items inside the list
 my_named_list$first
 ```
+:::
 
-
-## List {auto-animate="true"}
+## List
 
 ::: callout-note
 Many advanced functions will store their output as a list object.
@@ -581,7 +610,7 @@ model <- lm(Sepal.Length ~ Sepal.Width, data = iris)
 model
 ```
 
-## List {auto-animate="true"}
+## List
 
 ::: callout-note
 Many advanced functions will store their output as a list object.
@@ -597,7 +626,7 @@ str(model)
 
 # Data frame
 
-## Data frame {auto-animate="true"}
+## Data frame
 
 A special type of list:
 
@@ -615,7 +644,7 @@ my_df <- data.frame(col1 = c(1, 2, 3, 4),
 my_df
 ```
 
-## Data frame {auto-animate="true"}
+## Data frame
 
 A special type of list:
 
@@ -629,7 +658,7 @@ A special type of list:
 str(my_df)
 ```
 
-## Data frame {auto-animate="true"}
+## Data frame
 
 <br>
 A data frame has [**two dimensions**]{style="color:#ff2c2d;"} (number of rows and number of columns).
@@ -638,12 +667,17 @@ A data frame has [**two dimensions**]{style="color:#ff2c2d;"} (number of rows an
 #| echo: true
 ## Number of rows...
 nrow(my_df)
+```
 
+<br>
+
+```{r}
+#| echo: true
 ## Number of columns...
 ncol(my_df)
 ```
 
-## Data frame {auto-animate="true"}
+## Data frame
 
 <br>
 We can index using `[]` (just like a matrix) or using column names.
@@ -653,6 +687,8 @@ We can index using `[]` (just like a matrix) or using column names.
 ## Items in rows 1 and 2 from column 2
 my_df[c(1, 2), 2]
 ```
+
+<br>
 
 ::: {.fragment}
 ```{r}
@@ -678,21 +714,20 @@ my_df$col2 # but my_df$2 would not work!
 ```
 :::
 
-## Data frame {auto-animate="true"}
+## Data frame
 
 <br>
 We usually create a data frame by reading in a `.csv` file!
 
 ```{r}
 #| echo: true
-#| code-line-numbers: "1-2|4-5"
 ## Items in rows 1 and 2 from column 2
 iris_df <- read.csv("iris.csv")
 
 str(iris_df)
 ```
 
-## Data frame {auto-animate="true"}
+## Data frame
 
 <br>
 Use functions `head()`, `tail()`, or `summary()` to investigate a large data frame.
@@ -703,7 +738,7 @@ Use functions `head()`, `tail()`, or `summary()` to investigate a large data fra
 head(iris_df)
 ```
 
-## Data frame {auto-animate="true"}
+## Data frame
 
 <br>
 Use functions `head()`, `tail()`, or `summary()` to investigate a large data frame.
@@ -717,7 +752,7 @@ summary(iris_df)
 
 # Using Pipes
 
-## Pipes {auto-animate="true"}
+## Pipes
 
 <br>
 
@@ -735,7 +770,7 @@ This is typically useful to make the code of complex data wrangling compact and 
 
 ```{r}
 #| echo: true
-#| code-line-numbers: "1|3-7|9|3|4|5|6|7|1-9"
+#| code-line-numbers: "1-9|3|4|5|6|7|1-9"
 emails <- c("john.smith@email.com", "jane-doe@yahoo.com")
             
 emails |>
@@ -751,13 +786,13 @@ people
 
 # Using RMarkdown
 
-## Using RMarkdown {auto-animate="true"}
+## Using RMarkdown
 
 RMarkdown (`.Rmd`) file is a great way to record and share your analyses!
 
 ![](src/Rmd_example.png)
 
-## Using RMarkdown {auto-animate="true"}
+## Using RMarkdown
 
 Include code and output in the same document.
 
@@ -767,7 +802,7 @@ Include code and output in the same document.
 c(1, 2, 3, 4)
 ```
 
-## Using RMarkdown {auto-animate="true"}
+## Using RMarkdown
 
 Include plots to make a report.
 
@@ -776,7 +811,7 @@ Include plots to make a report.
 plot(Sepal.Length ~ Sepal.Width, data = iris_df)
 ```
 
-## Using RMarkdown {auto-animate="true"}
+## Using RMarkdown
 
 Write plain text to keep notes.
 
@@ -795,9 +830,9 @@ Some more notes...
 
 ````
 
-## Using RMarkdown {auto-animate="true"}
+## Using RMarkdown
 
-'knit' your notes to create a report.
+'Knit' your notes to create a report.
 
 ::: columns
 ::: {.column width="50%"}
@@ -821,19 +856,13 @@ Some more notes...
 :::
 :::
 
-## Using RMarkdown {auto-animate="true"}
+## Using RMarkdown
 
-'knit' your notes to create a report.
+'Knit' your notes to create a report.
 
 ![](src/knit_button.png)
 
-## Using RMarkdown {auto-animate="true"}
-
-::: callout-note
-TEST YOUR KNOWLEDGE
-:::
-
-## Using RMarkdown {auto-animate="true"}
+## Trying out RMarkdown
 
 - Create a new RMarkdown file in RStudio (File > New File > RMarkdown).
 
