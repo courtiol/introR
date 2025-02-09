@@ -108,20 +108,20 @@ packageVersion("ggplot2")
 
 ## Good practice
 
-### Set RStudio options
+Set RStudio options.
 
 ![](src/rstudio_options1.png)
 
 ## Good practice
 
-### Set RStudio options
+Set RStudio options.
 
 ![](src/rstudio_options2.png)
 
 
 ## Good practice
 
-### Save your script in a file
+Save your script in a file.
 
 ![](src/rstudio_panes.png)
 
@@ -129,7 +129,7 @@ packageVersion("ggplot2")
 
 ## Good practice
 
-### Use comments to understand your code better.
+Use comments to understand your code better.
 
 ```{r}
 #| echo: true
@@ -169,6 +169,7 @@ Trouble-shoot using `?` or `help()`.
 
 ```{r}
 #| echo: true
+#| eval: false
 ## Help documentation of the function sum()
 help(sum)
 ?sum
