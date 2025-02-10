@@ -13,6 +13,8 @@ editor_options:
   chunk_output_type: console
 ---
 
+<!-- For next year, do add RProject in best practice -->
+
 
 ```{css, echo=FALSE}
 p {
@@ -135,7 +137,7 @@ Use comments to understand your code better.
 #| echo: true
 #| eval: false
 #| code-line-numbers: "1|2|1-2"
-# EXPLAIN WHAT THE CODE DOES
+# EXPLAIN WHY YOU ARE DOING SOMETHING
 my_code_here
 ```
 
@@ -248,7 +250,7 @@ TRUE
 ```{r}
 #| echo: true
 ## Factor
-factor(c("A", "B"), levels = c("A", "B"))
+factor(c("A", "B"))
 ```
 :::
 
