@@ -13,7 +13,10 @@ editor_options:
   chunk_output_type: console
 ---
 
-<!-- For next year, do add RProject in best practice -->
+<!-- For next year, do add RProject in best practice 
+Also black background in screenshot render poorly, remake thus all wiht white background
+-->
+
 
 
 ```{css, echo=FALSE}
