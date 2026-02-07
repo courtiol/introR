@@ -13,8 +13,8 @@ editor_options:
   chunk_output_type: console
 ---
 
-<!-- For next year, do add RProject in best practice 
-Also black background in screenshot render poorly, remake thus all wiht white background
+<!-- TODO for next course, 
+Nothing for now
 -->
 
 
@@ -102,7 +102,7 @@ install.packages("hierfstat")
 
 ```{r}
 #| echo: true
-packageVersion("ggplot2")
+packageVersion("poppr")
 ```
 
 ::: {.fragment}
@@ -113,18 +113,44 @@ packageVersion("ggplot2")
 
 ## Good practice
 
+<br>
+
 Set RStudio options.
 
 ![](src/rstudio_options1.png)
 
 ## Good practice
 
+<br>
+
 Set RStudio options.
 
 ![](src/rstudio_options2.png)
 
 
+
 ## Good practice
+
+<br>
+
+Use RStudio 'Projects' to organize your work.
+
+![](src/rproject.png)
+
+## Good practice
+
+<br>
+
+Use RStudio 'Projects' to organize your work.
+
+Projects can be directly open from your file explorer.
+
+![](src/rproject2.png)
+
+
+## Good practice
+
+<br>
 
 Save your script in a file.
 
@@ -133,6 +159,8 @@ Save your script in a file.
 **We'll talk about RMarkdown later**
 
 ## Good practice
+
+<br>
 
 Use comments to understand your code better.
 
@@ -150,7 +178,7 @@ my_code_here
 
 <br>
 Functions (generally) take an input and return an output in R.
-<br>For example, the function `sum()` takes a numeric vector and will return a single value.
+<br>For example, the function `sum()` takes a numeric vector and returns a single value.
 
 ```{r}
 #| echo: true
@@ -162,8 +190,8 @@ sum(c(1, 3, 5, 1))
 
 ::: {.fragment}
 ::: callout-note
-`c()` is itself a function creating a **numeric vector**.
-<br>We'll discuss more what a numeric vector is soon.
+`c()` is itself a function creating the numeric vector.
+<br>We'll discuss more what a **vector** is soon.
 :::
 :::
 
@@ -184,6 +212,9 @@ You can learn what package the function is from, what the function does and what
 
 ## Functions
 
+<br>
+Trouble-shoot using `?` or `help()`.
+
 ![](src/help_doc.png)
 
 ## Functions
@@ -196,7 +227,7 @@ Different packages might have functions with the same name. 🤯
 
 ::: {.fragment}
 
-`package::function()` is explicit about which package to use.
+Using the syntax `package::function()` makes it explicit which package to use.
 
 ```{r}
 #| echo: true
@@ -225,7 +256,7 @@ sum(-)
 ## Objects
 
 <br>
-Basic kinds of R objects (or 'classes'):
+Basic kinds of R objects (or **classes**):
 
 ```{r}
 #| echo: true
@@ -308,7 +339,7 @@ str(my_object)
 ## Vector
 
 <br>
-$\geq$ 1 values of the **same type**.
+$\geq$ 1 values of the **same class**.
 
 ```{r}
 #| echo: true
@@ -322,7 +353,7 @@ str(my_vector)
 ## Vector
 
 <br>
-$\geq$ 1 values of the [**same type**]{style="color:#ff2c2d;"}.
+$\geq$ 1 values of the [**same class**]{style="color:#ff2c2d;"}.
 
 ```{r}
 #| echo: true
@@ -386,7 +417,7 @@ Watch out for missing data.
 missing_data <- c(NULL, 1.1, 0.2, NA, 7, NaN, Inf)
 
 # NULL: Empty
-# NA: Missing data (can be any type)
+# NA: Missing data (can be any class)
 # NaN: Not a number (specific to numeric)
 # Inf: Infinity
 str(missing_data)
@@ -406,7 +437,7 @@ missing_data
 ## Matrix
 
 <br>
-$\geq$ 1 value(s) of the **same type** with **two dimensions**.
+$\geq$ 1 value(s) of the **same class** with **two dimensions**.
 
 ::: {.fragment}
 ```{r}
@@ -430,7 +461,7 @@ str(my_matrix)
 ## Matrix
 
 <br>
-$\geq$ 1 value(s) of the [**same type**]{style="color:#ff2c2d;"} with **two dimensions**.
+$\geq$ 1 value(s) of the [**same class**]{style="color:#ff2c2d;"} with **two dimensions**.
 
 ```{r}
 #| echo: true
@@ -446,7 +477,7 @@ str(my_matrix)
 ## Matrix
 
 <br>
-$\geq$ 1 value(s) of the **same type** with [**two dimensions**]{style="color:#ff2c2d;"}.
+$\geq$ 1 value(s) of the **same class** with [**two dimensions**]{style="color:#ff2c2d;"}.
 
 ```{r}
 #| echo: true
@@ -469,7 +500,7 @@ ncol(my_matrix)
 Index a matrix with `[]`.
 
 ::: callout-note
-Remember, now we have two dimensions.
+Remember, we have here two dimensions.
 <br>So we index with `[`[**ROW**]{style="color:#ff2c2d;"}`,` [**COLUMN**]{style="color:#ff2c2d;"}`]`.
 :::
 
@@ -501,7 +532,7 @@ my_matrix[, 2]
 
 Contains any number of items.
 
-Each item can be a [**different type**]{style="color:#ff2c2d;"}.
+Each item can be a [**different class**]{style="color:#ff2c2d;"}.
 
 ```{r}
 #| echo: true
@@ -512,7 +543,7 @@ c(c(1, 2, 3), c("A", "B", "C"), c(3, 4, 5))
 ::: {.fragment}
 ```{r}
 #| echo: true
-## Use lists to store character and numeric data in one object
+## Use lists to store objects of different classes together
 my_list <- list(c(1, 2, 3),
                 c("A", "B", "C"),
                 c(3, 4, 5))
@@ -525,7 +556,7 @@ my_list
 
 Contains any number of items.
 
-Each item can be a [**different type**]{style="color:#ff2c2d;"}.
+Each item can be a [**different class**]{style="color:#ff2c2d;"}.
 
 ```{r}
 #| echo: true
@@ -565,7 +596,7 @@ my_list[c(1, 3)]
 ::: {.fragment}
 ```{r}
 #| echo: true
-## Use `[[]]` to access the items inside the list
+## Use `[[]]` to extract items from the list
 ## Return list item 1
 my_list[[1]]
 ```
@@ -574,7 +605,7 @@ my_list[[1]]
 ## List
 
 <br>
-When list-elements are named, they can be accessed using either `[[]]` or `$`.
+List-elements can be named.
 
 ```{r}
 #| echo: true
@@ -582,29 +613,47 @@ When list-elements are named, they can be accessed using either `[[]]` or `$`.
 my_named_list <- list(first = c(1, 2, 3),
                       second = c("A", "B", "C"),
                       third = c(3, 4, 5))
-str(my_named_list)
+my_named_list
 ```
 
-::: {.fragment}
+## List
+
+<br>
+When list-elements are named, they can be extracted using either `[[]]` or `$`.
+
 ```{r}
 #| echo: true
-## Use `[[]]` to access the items inside the list
+## Use `[[]]` to extract the items inside the list
 my_named_list[["first"]] # same as my_named_list[[1]]
 ```
-:::
 
 ::: {.fragment}
 ```{r}
 #| echo: true
-## Use `$` to access the items inside the list
+## Use `$` to extract the items inside the list
 my_named_list$first
 ```
 :::
 
+::: {.fragment}
+::: callout-note
+If the name is defined via an object, only `[[]]` will do.
+:::
+
+```{r}
+#| echo: true
+## Define the element name indirectly
+what_I_want <- "second"
+my_named_list[[what_I_want]]
+```
+:::
+
+
+
 ## List
 
 ::: callout-note
-Many advanced functions will store their output as a list object.
+Many advanced functions store their output as a list object.
 
 Remember, you can use `str()` to understand them better.
 :::
@@ -619,14 +668,14 @@ model
 ## List
 
 ::: callout-note
-Many advanced functions will store their output as a list object.
+Many advanced functions store their output as a list object.
 
 Remember, you can use `str()` to understand them better.
 :::
 
 ```{r}
 #| echo: true
-# Internally, they have a lot more information!
+# Internally, there is a lot more information!
 str(model)
 ```
 
@@ -634,9 +683,9 @@ str(model)
 
 ## Data frame
 
-A special type of list:
+A special list:
 
-- Each item in the list (i.e. column) is a vector ([**same type**]{style="color:#ff2c2d;"}).
+- Each item in the list (i.e. column) is a vector ([**same class**]{style="color:#ff2c2d;"}).
 - All items in the list are the [**same length**]{style="color:#ff2c2d;"}.
 - Each item has a [**unique name**]{style="color:#ff2c2d;"}.
 
@@ -652,9 +701,9 @@ my_df
 
 ## Data frame
 
-A special type of list:
+A special list:
 
-- Each item in the list (i.e. column) is a vector ([**same type**]{style="color:#ff2c2d;"}).
+- Each item in the list (i.e. column) is a vector ([**same class**]{style="color:#ff2c2d;"}).
 - All items in the list are the [**same length**]{style="color:#ff2c2d;"}.
 - Each item has a [**unique name**]{style="color:#ff2c2d;"}.
 
